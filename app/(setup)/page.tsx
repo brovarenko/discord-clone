@@ -1,9 +1,12 @@
 import { redirect } from "next/navigation";
+
 import { db } from "@/lib/db";
 import { initialProfile } from "@/lib/initial-profile";
-
+import { InitialModal } from "@/components/modals/initial-modal";
+import { ModeToggle } from "@/components/mode-toggle";
 const SetupPage = async () => {
   const profile = await initialProfile();
+
   const server = await db.server.findFirst({
     where: {
       members: {
@@ -18,7 +21,8 @@ const SetupPage = async () => {
     return redirect(`/servers/${server.id}`);
   }
 
-  return <div>Create a server</div>;
+  return <InitialModal />;
+  // return <div>Hi there</div>;
 };
 
 export default SetupPage;
