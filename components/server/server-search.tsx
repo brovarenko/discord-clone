@@ -39,7 +39,6 @@ export const ServerSearch = ({ data }: ServerSearchProps) => {
         setOpen((open) => !open);
       }
     };
-
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
   }, []);
