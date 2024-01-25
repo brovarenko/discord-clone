@@ -6,11 +6,11 @@ import { Member, Message, Profile } from "@prisma/client";
 import { Loader2, ServerCrash } from "lucide-react";
 
 import { useChatQuery } from "@/hooks/use-chat-query";
-//import { useChatSocket } from "@/hooks/use-chat-socket";
-//import { useChatScroll } from "@/hooks/use-chat-scroll";
+import { useChatSocket } from "@/hooks/use-chat-socket";
+import { useChatScroll } from "@/hooks/use-chat-scroll";
 
 import { ChatWelcome } from "./chat-welcome";
-//import { ChatItem } from "./chat-item";
+import { ChatItem } from "./chat-item";
 
 const DATE_FORMAT = "d MMM yyyy, HH:mm";
 
@@ -57,16 +57,16 @@ export const ChatMessages = ({
       paramKey,
       paramValue,
     });
-  //useChatSocket({ queryKey, addKey, updateKey });
-  // useChatScroll({
-  //   chatRef,
-  //   bottomRef,
-  //   loadMore: fetchNextPage,
-  //   shouldLoadMore: !isFetchingNextPage && !!hasNextPage,
-  //   count: data?.pages?.[0]?.items?.length ?? 0,
-  // });
+  useChatSocket({ queryKey, addKey, updateKey });
+  useChatScroll({
+    chatRef,
+    bottomRef,
+    loadMore: fetchNextPage,
+    shouldLoadMore: !isFetchingNextPage && !!hasNextPage,
+    count: data?.pages?.[0]?.items?.length ?? 0,
+  });
 
-  if (status === "loading") {
+  if (status === "pending") {
     return (
       <div className='flex flex-col flex-1 justify-center items-center'>
         <Loader2 className='h-7 w-7 text-zinc-500 animate-spin my-4' />
